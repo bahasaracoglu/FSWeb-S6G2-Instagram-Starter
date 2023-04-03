@@ -4,7 +4,6 @@ import React from "react";
 const Yorum = (props) => {
   // 🔥 Bu bileşenin parentının aşağıdaki propları düzgün gönderdiğinden emin olun.
   const { yorum } = props;
-  console.log(yorum);
 
   return (
     <div className="comment-text">

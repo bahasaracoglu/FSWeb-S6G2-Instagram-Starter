@@ -13,7 +13,7 @@ import { useState } from "react";
 import "./App.css";
 import AramaÇubuğu from "./bileşenler/AramaÇubuğu/AramaÇubuğu.js";
 import Gönderiler from "./bileşenler/Gönderiler/Gönderiler.js";
-import Yorumlar from "./bileşenler/Yorumlar/Yorumlar.js";
+
 import sahteVeri from "./sahte-veri.js";
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
 
   const [gonderiler, setGonderiler] = useState(sahteVeri);
   const [arama, setArama] = useState(null);
-  console.log(gonderiler);
+
   const gonderiyiBegen = (gonderiID) => {
     /*
       Bu fonksiyon, belirli bir id ile gönderinin beğeni sayısını bir artırma amacına hizmet eder.
@@ -37,10 +37,32 @@ const App = () => {
         - aksi takdirde, sadece gönderi nesnesini değiştirmeden döndürün.
      */
 
+    /*setGonderiler(
+      gonderiler.map((post) => (post.id === gonderiID ? post.likes + 1 : post))
+    );*/
+    /*
     setGonderiler(
-      gonderiler.map((post) =>
-        post.id === gonderiID ? (post.likes = post.likes + 1) : post
-      )
+      gonderiler.map((post) => (post.id === gonderiID ? { ...post, likes: post.likes + 1 } : post))
+    );
+    */
+
+    setGonderiler(
+      gonderiler.map((post) => {
+        if (post.id === gonderiID) {
+          // beğeni sayısını artırma veya azaltma işlemi yapılıyor
+          const updatedLikes = post.likedByUser
+            ? post.likes - 1
+            : post.likes + 1;
+
+          return {
+            ...post,
+            likes: updatedLikes,
+            likedByUser: !post.likedByUser, // beğenildiği/ beğenilmediği durumu ters çeviriliyor
+          };
+        } else {
+          return post;
+        }
+      })
     );
   };
 

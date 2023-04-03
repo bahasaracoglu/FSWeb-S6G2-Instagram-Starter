@@ -5,7 +5,7 @@ import "./Yorumlar.css";
 const Yorumlar = (props) => {
   // 🔥 Bu bileşenin parentının aşağıdaki propları düzgün gönderdiğinden emin olun.
   const { yorumlar } = props;
-  console.log(yorumlar);
+
   return (
     <div>
       {
